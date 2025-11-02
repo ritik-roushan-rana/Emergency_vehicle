@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 24
+names: ['Army', 'Vehicle', 'ambulance', 'ambulance_108', 'ambulance_SOL', 'ambulance_lamp', 'ambulance_text', 'auto', 'bike', 'bus', 'car', 'fire_truck', 'fireladder', 'firelamp', 'firesymbol', 'firewriting', 'horse', 'police', 'police_lamp', 'police_lamp_ON', 'road_sign', 'tempo traveller', 'truck', 'writing']
+
+roboflow:
+  workspace: avanthika-s-nfpex
+  project: emergency-copy-big
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/avanthika-s-nfpex/emergency-copy-big/dataset/3
