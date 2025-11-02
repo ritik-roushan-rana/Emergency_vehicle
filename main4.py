@@ -21,7 +21,7 @@ if not GOOGLE_MAPS_API_KEY:
     raise RuntimeError("Set GOOGLE_MAPS_API_KEY in your environment or .env file")
 
 MODEL_PATH = "best.pt"  # YOLOv8 model path
-VIDEO_SOURCE = "test_video_converted.mp4"  # or 0 for webcam
+VIDEO_SOURCE = "test_video_converted4.mp4"  # or 0 for webcam
 
 # Camera / Source location used for maps queries (latitude, longitude)
 SOURCE_LOCATION = (28.6139, 77.2090)  # Connaught Place, New Delhi# New Delhi sample — change to your test location
