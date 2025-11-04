@@ -55,6 +55,37 @@ This project is a real-time simulation of an Indian single-lane, two-way road tr
 
 ---
 
+## 🚦 Multi-Junction Emergency Signal Propagation (Nov 2025)
+
+- **How Emergency Detection and Signal Propagation Works:**
+  - Emergency vehicles are first detected in normal traffic, before reaching TL1.
+  - Once detected, the system estimates the emergency vehicle's distance and immediately sets TL1 to GREEN (emergency mode).
+  - The emergency signal is then propagated to TL2 and TL3 as the vehicle approaches each junction, ensuring priority passage through all signals.
+  - This means detection happens before TL1, and TL1 responds first, followed by TL2 and TL3 as the emergency vehicle moves forward.
+
+- **Three Traffic Lights (TL1, TL2, TL3) with Emergency-Aware Logic:**
+  - **TL1 (Main Junction):**
+    - Instantly turns GREEN when an emergency vehicle is detected within 80m.
+    - GREEN duration is dynamically set based on congestion (8–12s typical).
+    - Otherwise, cycles: RED (5s) → YELLOW (2s) → GREEN (5s or dynamic) → repeat.
+  - **TL2 (Next Junction):**
+    - If TL1 is GREEN and TL2 is in emergency mode, TL2 switches to YELLOW (warn mode).
+    - If emergency vehicle is approaching (within 120m beyond TL1), TL2 transitions YELLOW → GREEN early.
+    - Otherwise, cycles: GREEN (duration) → RED (5s) → repeat.
+  - **TL3 (Farther Junction):**
+    - If emergency vehicle is within 240m, TL3 switches to YELLOW (preemptive warning).
+    - Otherwise, stays RED until cycle resets.
+    - No direct dependency on TL1/TL2, only EV distance.
+- **State Transitions in Emergency Mode:**
+  - TL1: GREEN, TL2: YELLOW, TL3: YELLOW as EV approaches.
+  - TL2: GREEN, TL3: YELLOW as EV passes TL1.
+  - TL3: GREEN if EV is very close (logic can be extended).
+- **All previous features (lane-aware logic, congestion handling, overlays, route preview, etc.) are preserved.**
+
+> This update brings multi-junction, emergency-prioritizing traffic control with realistic state transitions for Indian roads.
+
+---
+
 ## 📊 Training Performance
 
 - ✅ **Total Dataset:** ~9000 images
