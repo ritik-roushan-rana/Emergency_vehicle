@@ -1,4 +1,4 @@
-# AI-Based Emergency Vehicle Detection & Smart Single-Lane Traffic Control
+#AI-Powered Two-Lane and Multi-Junction Emergency Traffic Management for Indian Roads
 
 ## How to Run This Project
 
