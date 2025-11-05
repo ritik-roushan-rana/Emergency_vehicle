@@ -58,11 +58,11 @@ flowchart TD
     
     P -->|No| AD{Road Blocked?<br/>Both lanes > 10}
     AD -->|Yes| AE[Both Signals RED<br/>Display: ROAD BLOCKED! ALL STOP]
-    AD -->|No| AF[Normal Alternating Mode]
+    AD -->|No| AF[Normal Traffic Flow<br/>No Congestion, No Emergency]
     
     AF --> AG{Time for Switch?<br/>Every 7 seconds}
-    AG -->|Yes| AH[Switch Active Lane]
-    AG -->|No| AI[Keep Current State]
+    AG -->|Yes| AH[Switch Active Lane<br/>Balanced Traffic Flow]
+    AG -->|No| AI[Keep Current State<br/>Continue Current Lane Priority]
     
     AH --> AJ{Last Green Lane?}
     AJ -->|LEFT| AK[RIGHT GREEN, LEFT RED]
@@ -165,11 +165,12 @@ flowchart LR
 - **TL2 Emergency Range**: < 200m (80m + 120m)
 - **TL3 Emergency Range**: < 320m (80m + 240m)
 
-## Congestion States
+## Traffic Flow States
 
-1. **BLOCKED**: Both lanes > 10 vehicles, both signals RED
-2. **CLEARING_LEFT**: Left lane < 15, getting GREEN priority
-3. **CLEARING_RIGHT**: Right lane < 15, getting GREEN priority
-4. **Normal**: Alternating signals every 7 seconds
+1. **NORMAL FLOW**: Both lanes ≤ 10 vehicles, no emergency → Alternating signals every 7 seconds
+2. **BLOCKED**: Both lanes > 10 vehicles, both signals RED
+3. **CLEARING_LEFT**: Left lane < 15, getting GREEN priority
+4. **CLEARING_RIGHT**: Right lane < 15, getting GREEN priority
+5. **EMERGENCY PRIORITY**: Emergency vehicle detected → Priority lane gets GREEN/BLUE
 
 This flowchart represents your comprehensive two-lane traffic management system with emergency prioritization and multi-junction coordination!

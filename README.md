@@ -34,20 +34,24 @@ This project is a real-time simulation of an Indian single-lane, two-way road tr
   - The system now divides the road into LEFT and RIGHT lanes, counting vehicles in each lane per frame.
   - Each detected vehicle is marked with a colored dot (blue for left lane, yellow for right lane) for clear lane visualization.
 - **Blockage/Jam Detection:**
-  - If both lanes exceed a tunable vehicle count threshold (default: 20), the road is considered blocked.
-  - In a jam, both signals turn RED and a warning is displayed.
+  - If both lanes exceed 10 vehicles, the road is considered blocked/congested.
+  - In heavy congestion (no emergency), both signals turn RED and a warning is displayed.
 - **Emergency Blocked Override:**
-  - If an emergency vehicle is detected during a jam, the system flashes a BLUE signal for the emergency lane and displays a priority warning overlay, urging drivers to clear the path.
+  - If an emergency vehicle is detected during congestion, the system flashes a BLUE signal for the emergency lane and displays a priority warning overlay, urging drivers to clear the path.
   - The emergency vehicle's bounding box and label remain visible.
 - **Adaptive Signal Logic:**
-  - If only an emergency vehicle is present (no jam), its lane gets GREEN, the other stays RED, and a priority message is shown.
-  - Otherwise, signals alternate every interval for balanced flow.
-- **Heavy Congestion Handling (NEW):**
-  - If both lanes have more than 20 vehicles and no emergency vehicle is present, the system marks the road as "blocked".
+  - If only an emergency vehicle is present (no congestion), its lane gets GREEN, the other stays RED, and a priority message is shown.
+  - **Normal Alternating Mode** (no emergency, no congestion):
+    - **Cycle 1**: LEFT lane → GREEN, RIGHT lane → RED (7 seconds)
+    - **Cycle 2**: RIGHT lane → GREEN, LEFT lane → RED (7 seconds)
+    - **Cycle 3**: LEFT lane → GREEN, RIGHT lane → RED (7 seconds)
+    - This alternating pattern continues indefinitely for balanced traffic flow.
+- **Heavy Congestion Handling:**
+  - If both lanes have more than 10 vehicles and no emergency vehicle is present, the system marks the road as "blocked".
   - Both signals turn RED and a warning message "HEAVY CONGESTION DETECTED! WAITING TO CLEAR" is displayed.
   - The system continuously monitors vehicle counts during this state.
   - Once one lane drops below 15 vehicles, that lane is given GREEN to help clear traffic, while the other remains RED. A message indicates which lane is being cleared.
-  - When both lanes are below congestion levels, normal alternating signal logic resumes automatically.
+  - When both lanes are below congestion levels (< 15), normal alternating signal logic resumes automatically.
   - This logic does not interfere with emergency detection or blockage override, ensuring emergency vehicles always have top priority.
 - **All previous features (route preview, FPS, overlays, etc.) are preserved.**
 
@@ -118,15 +122,21 @@ This project is a real-time simulation of an Indian single-lane, two-way road tr
 - Counts the number of vehicles in each region per frame.
 
 ### 3. Adaptive Signal Control
-- If **no emergency vehicle** is detected:
-  - Compares vehicle counts:
-    - If `LEFT > RIGHT + 3`: LEFT signal turns GREEN, RIGHT is RED.
-    - If `RIGHT > LEFT + 3`: RIGHT signal turns GREEN, LEFT is RED.
-    - If counts are similar: signals alternate every few seconds.
-- If an **emergency vehicle** is detected:
-  - Identifies which region (LEFT/RIGHT) the emergency is in.
-  - Turns that direction's signal GREEN immediately and keeps it GREEN until the emergency leaves.
-  - If traffic is blocked (count > 20), displays a warning to suggest alternate routing.
+- **Normal Traffic Flow** (no emergency, both lanes ≤ 10 vehicles):
+  - **Alternating Signal Pattern:**
+    - **Time 0-7s**: LEFT = GREEN, RIGHT = RED
+    - **Time 7-14s**: LEFT = RED, RIGHT = GREEN  
+    - **Time 14-21s**: LEFT = GREEN, RIGHT = RED
+    - **Time 21-28s**: LEFT = RED, RIGHT = GREEN
+    - This 7-second alternating cycle continues for balanced traffic flow.
+- **Heavy Congestion** (both lanes > 10 vehicles, no emergency):
+  - Initially: Both signals turn RED with "HEAVY CONGESTION DETECTED!" warning.
+  - Smart clearing: If one lane drops below 15 vehicles, it gets GREEN priority to clear traffic.
+  - Returns to normal alternating mode once both lanes are below congestion threshold.
+- **Emergency Vehicle Priority**:
+  - **Clear Road**: Emergency lane gets GREEN immediately, other lane stays RED.
+  - **Blocked Road** (both lanes > 10 vehicles): Emergency lane flashes BLUE signal with "CLEAR PATH" warning.
+  - Multi-junction propagation: TL1 → TL2 → TL3 signals coordinate based on emergency vehicle distance.
 
 ### 4. Emergency Vehicle Priority & Visualization
 - Emergency vehicles are highlighted with yellow bounding boxes and labels.
