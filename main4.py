@@ -687,6 +687,10 @@ def main():
             cx = int((x1 + x2) / 2)
             cy = int((y1 + y2) / 2)
 
+            # Print detected vehicle log to terminal
+            lane = 'LEFT' if cx < mid_x else 'RIGHT'
+            print(f"[Detect] {label} | conf={conf:.2f} | lane={lane} | bbox=({x1:.0f},{y1:.0f},{x2:.0f},{y2:.0f})")
+
             if label in vehicle_classes or label in emergency_classes:
                 if cx < mid_x:
                     left_lane_count += 1
