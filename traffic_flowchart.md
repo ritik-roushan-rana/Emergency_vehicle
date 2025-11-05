@@ -83,9 +83,6 @@ flowchart TD
     AQ -->|No| B
     AQ -->|Yes| AR[End]
 
-    style F fill:#ff9999
-    style J fill:#ffcc99
-    style P fill:#ffcc99
     style K fill:#0066ff,color:#ffffff
     style N fill:#00cc00,color:#ffffff
     style S fill:#ff0000,color:#ffffff
