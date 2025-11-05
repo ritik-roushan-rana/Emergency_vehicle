@@ -22,6 +22,10 @@ flowchart TD
     J -->|Yes| K[Flash BLUE Signal<br/>for Emergency Lane]
     K --> L[Display: EMERGENCY BLOCKED!<br/>CLEAR PATH - LANE PRIORITY]
     L --> M[Show Route Preview]
+    M --> MS[Full Preview Option]
+    MS --> M1[Show Full Route, All TL States, All Detected Vehicles]
+    M1 --> M2[Display Full System State]
+    M2 --> AM
     
     J -->|No| N[Set Emergency Lane GREEN<br/>Other Lane RED]
     N --> O[Display: EMERGENCY VEHICLE<br/>PRIORITY: LANE]
@@ -88,6 +92,9 @@ flowchart TD
     style S fill:#ff0000,color:#ffffff
     style V fill:#00cc00,color:#ffffff
     style W fill:#00cc00,color:#ffffff
+    style MS fill:#ff9900,color:#ffffff
+    style M1 fill:#ffcc00,color:#000000
+    style M2 fill:#ffffcc,color:#000000
 ```
 
 ## Emergency Vehicle Priority States
