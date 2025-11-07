@@ -759,7 +759,7 @@ def main():
         smart_signal_propagation(traffic_network, ev_distance, left_lane_count, right_lane_count)
 
         # AI Traffic Control Logic (two-lane)
-        blocked_threshold = 10
+        blocked_threshold = 3
         clear_threshold = 15
         road_blocked = (left_lane_count > blocked_threshold and right_lane_count > blocked_threshold)
         heavy_congestion = (road_blocked and not emergency_detected)
@@ -888,7 +888,7 @@ def main():
 
         draw_simulation_window(traffic_network, ev_distance, left_lane_count, right_lane_count, fps)
 
-        key = cv2.waitKey(1) & 0xFF
+        key = cv2.waitKey(40) & 0xFF  # Increased delay for slower playback (was 1)
         if key == 27:  # ESC
             break
 

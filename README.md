@@ -20,7 +20,7 @@
 
 ---
 
-# AI-Based Emergency Vehicle Detection & Smart Single-Lane Traffic Control
+#  AI-Powered Two-Lane and Multi-Junction Emergency Traffic Management for Indian Roads
 
 ## Overview
 This project is a real-time simulation of an Indian single-lane, two-way road traffic control system that uses AI (YOLOv8) and OpenCV to:
