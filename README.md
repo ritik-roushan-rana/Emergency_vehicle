@@ -26,7 +26,7 @@ Below are demo screenshots of the system in action:
 
 ### Main Video Window (with traffic detection and signals)
 
-![Main Video Window Demo](images/main_video_demo.png)
+![Main Video Window Demo](images/main_video_demo2.png)
 
 ### Traffic Simulation Window
 
