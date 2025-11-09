@@ -20,6 +20,20 @@
 
 ---
 
+## Demo Screenshots
+
+Below are demo screenshots of the system in action:
+
+### Main Video Window (with traffic detection and signals)
+
+![Main Video Window Demo](images/main_video_demo.png)
+
+### Traffic Simulation Window
+
+![Traffic Simulation Demo](images/traffic_simulation_demo.png)
+
+---
+
 #  AI-Powered Two-Lane and Multi-Junction Emergency Traffic Management for Indian Roads
 
 ## Overview
@@ -149,18 +163,6 @@ This project is a real-time simulation of an Indian single-lane, two-way road tr
 - Draws colored rectangles at frame edges to represent traffic signals (GREEN/RED).
 - Shows a warning if an emergency vehicle is stuck in heavy traffic.
 - Displays a live route preview map when an emergency is present.
-
-## Demo Screenshots
-
-Below are demo screenshots of the system in action:
-
-### Main Video Window (with traffic detection and signals)
-
-![Main Video Window Demo](images/main_video_demo.png)
-
-### Traffic Simulation Window
-
-![Traffic Simulation Demo](images/traffic_simulation_demo.png)
 
 ## How It Works
 1. **Setup**: Place your YOLOv8 model (`best.pt`) and a test video in the project folder. Add your Google Maps API key to a `.env` file.
